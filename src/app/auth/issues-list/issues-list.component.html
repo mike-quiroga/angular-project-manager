@@ -1,29 +1,36 @@
-<div class="b-issues-list margin-top-sm">
-  <h2>Issues</h2>
-  <div class="b-issue" *ngFor="let issue of issues">
-    <div class="b-issue__title-container">
-      <a (click)="onClickIssue(issue.id)">
-        <h3 class="b-issue__title">{{ issue.title }}</h3>
-      </a>
-    </div>
-    <div class="b-issue__description">
-      {{ issue.description }}
-    </div>
-    <div class="b-issue__status--container">
-      <strong>Status: </strong>
-      <span class="b-issue__status b-issue__status--{{ issue.status }}">
-        {{ issue.status }}
-      </span>
-    </div>
+<div *ngIf="isLoading; else elseBlock">
+  <div class="auth-loader-container">
+    <app-loader></app-loader>
   </div>
 </div>
+<ng-template #elseBlock>
+  <div class="b-issues-list margin-top-sm">
+    <h2>Issues</h2>
+    <div class="b-issue" *ngFor="let issue of issues">
+      <div class="b-issue__title-container">
+        <a (click)="onClickIssue(issue.id)">
+          <h3 class="b-issue__title">{{ issue.title }}</h3>
+        </a>
+      </div>
+      <div class="b-issue__description">
+        {{ issue.description }}
+      </div>
+      <div class="b-issue__status--container">
+        <strong>Status: </strong>
+        <span class="b-issue__status b-issue__status--{{ issue.status }}">
+          {{ issue.status }}
+        </span>
+      </div>
+    </div>
+  </div>
 
-<div class="row">
-  <div class="col-md-2 col-md-offset-10 margin-top-sm margin-bottom-sm">
-    <div class="overflow-hidden">
-      <button class="btn btn-primary pull-right" [routerLink]="['/issues/nuevo']">
-        Nuevo Issue
-      </button>
+  <div class="row">
+    <div class="col-md-2 col-md-offset-10 margin-top-sm margin-bottom-sm">
+      <div class="overflow-hidden">
+        <button class="btn btn-primary pull-right" [routerLink]="['/issues/nuevo']">
+          Nuevo Issue
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</ng-template>
