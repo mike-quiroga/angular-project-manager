@@ -13,7 +13,6 @@ export class ProjectListService extends HttpService {
   }
 
   public getAll(): Observable<Array<Project>> {
-    const projects: Array<Project> = [];
     const url = `${this.apiBaseURL}/projects`;
 
     return this.get(url, this._authService.user.api_token);
