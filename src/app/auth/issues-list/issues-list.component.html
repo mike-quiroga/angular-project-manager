@@ -2,7 +2,7 @@
   <h2>Issues</h2>
   <div class="b-issue" *ngFor="let issue of issues">
     <div class="b-issue__title-container">
-      <a href="">
+      <a (click)="onClickIssue(issue.id)">
         <h3 class="b-issue__title">{{ issue.title }}</h3>
       </a>
     </div>

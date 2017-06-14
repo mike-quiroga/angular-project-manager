@@ -1,29 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Issue } from '../models/issue.model';
+import { HttpService } from '../../../common/services/http.service';
+import { Config } from '../../../common/config';
+import { AuthenticationService } from '../../../common/services/authentication.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class IssuesListService {
 
-  constructor() { }
+  apiBaseURL: string = Config.API_SERVER_URL;
 
-  public getAll(): Array<Issue> {
-    const issues: Array<Issue> = [];
+  constructor( public _http: HttpService, private _authService: AuthenticationService ) {
 
-    issues.push( {
-      id: 1,
-      title: 'Crear layout principal de la aplicación con Bootstrap',
-      slug: '01',
-      description: 'Este layout deberá usar la última versión estable de Bootstrap',
-      project_id: 1,
-      reporter: 2,
-      assignee: 2,
-      type: 'TASK',
-      status: 'OPEN',
-      priority: 'CRITICAL',
-      created_at: '2017-05-29 17:08:24',
-      updated_at: '2017-05-29 17:39:49'
-    } );
-
-    return issues;
   }
+
+  public getAll(): Observable<Array<Issue>> {
+    const issues: Array<Issue> = [];
+    const url = `${this.apiBaseURL}/issues`;
+
+    return this._http.get( url, this._authService.user.api_token );
+  }
+
+  public getIssue( id: number ): Observable<Issue> {
+    const url = `${this.apiBaseURL}/issues/${id}`;
+    return this._http.get( url, this._authService.user.api_token );
+  }
+
+  public deleteIssue( id: number ): Observable<Issue> {
+  const url = `${this.apiBaseURL}/issues/${id}`;
+  return this._http.delete( url, this._authService.user.api_token );
+}
+
 }

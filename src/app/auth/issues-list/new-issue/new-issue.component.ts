@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../../common/services/http.service';
 import {Issue} from '../models/issue.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AuthenticationService } from '../../../common/services/authentication.service';
 
 @Component({
   selector: 'app-new-issue',
@@ -58,7 +59,7 @@ export class NewIssueComponent implements OnInit {
     }
   };
 
-  constructor(public _httpService: HttpService, public _formBuilder: FormBuilder) {
+  constructor(public _httpService: HttpService, public _formBuilder: FormBuilder, private _authService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -141,7 +142,7 @@ export class NewIssueComponent implements OnInit {
     this.issue = this.issueForm.value;
 
     console.log(this.issue);
-    this._httpService.post('url', this.issue).subscribe(
+    this._httpService.post('http://172.104.91.187/issues', this.issue, this._authService.user.api_token ).subscribe(
       data => {
         // something to do...
       },

@@ -1,0 +1,23 @@
+<div *ngIf="!issue">
+  <div class="auth-loader-container">
+    <app-loader></app-loader>
+  </div>
+</div>
+<div class="row" *ngIf="issue">
+  <div class="col-xs-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{issue.title}}</h3>
+      </div>
+      <div class="panel-body">
+        <p>Description: {{issue.description}}</p>
+        <p>Reporter: {{issue.reporter}}</p>
+        <p>Assignee: {{issue.assignee}}</p>
+        <p>Status: {{issue.status}}</p>
+        <p>Priority: {{issue.priority}}</p>
+        <button class="btn btn-info" (click)="regresar()">Regresar</button>
+        <button class="btn btn-danger" (click)="eliminarIssue(issue.id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

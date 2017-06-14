@@ -10,8 +10,9 @@ import { NewIssueComponent } from './auth/issues-list/new-issue/new-issue.compon
 import { NotFoundComponent } from './common/not-found/not-found.component';
 import { PublicGuard } from './common/guards/public.guard';
 import { ProjectDetailComponent } from './auth/project-detail/project-detail.component';
+import { IssuesDetailComponent } from './auth/issues-detail/issues-detail.component';
 
-export const routes: Routes = [
+export const routes:Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: '/login'
   },
@@ -25,23 +26,29 @@ export const routes: Routes = [
     path: 'proyectos', component: ProjectsHomeComponent,
     data: { name: 'Proyectos' }, canActivate: [ AuthGuard ],
     children: [
-      { path: '', component: ProjectListComponent,  pathMatch: 'full' },
+      { path: '', component: ProjectListComponent, pathMatch: 'full' },
       { path: 'detalle/:id', component: ProjectDetailComponent },
-      ]
+    ]
   },
   {
-    path: 'issues', component: IssuesListComponent, data: { name: 'Issues' }, canActivate: [ AuthGuard ]
-  },
-  {
-    path: 'proyectos/nuevo',
-    component: NewProjectComponent,
-    canActivate: [ AuthGuard ]
+    path: 'issues', pathMatch: 'full', component: IssuesListComponent, data: { name: 'Issues' }, canActivate: [ AuthGuard ]
   },
   {
     path: 'issues/nuevo',
     component: NewIssueComponent,
     canActivate: [ AuthGuard ]
   },
+  {
+    path: 'issues/:id',
+    component: IssuesDetailComponent,
+    canActivate: [ AuthGuard ]
+  },
+  {
+    path: 'proyectos/nuevo',
+    component: NewProjectComponent,
+    canActivate: [ AuthGuard ]
+  },
+
   {
     path: '**', component: NotFoundComponent
   }

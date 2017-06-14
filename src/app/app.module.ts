@@ -29,6 +29,7 @@ import {PublicGuard} from './common/guards/public.guard';
 import {routes} from './routes';
 import { ProjectsHomeComponent } from './auth/projects-home/projects-home.component';
 import { ProjectDetailComponent } from './auth/project-detail/project-detail.component';
+import { IssuesDetailComponent } from './auth/issues-detail/issues-detail.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ProjectDetailComponent } from './auth/project-detail/project-detail.com
     LoaderComponent,
     LoginComponent,
     ProjectsHomeComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    IssuesDetailComponent
   ],
   imports: [
     BrowserModule,
