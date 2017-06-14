@@ -3,6 +3,7 @@ import {HttpService} from '../../../common/services/http.service';
 import {Issue} from '../models/issue.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthenticationService } from '../../../common/services/authentication.service';
+import { Config } from  '../../../common/config';
 
 @Component({
   selector: 'app-new-issue',
@@ -142,7 +143,7 @@ export class NewIssueComponent implements OnInit {
     this.issue = this.issueForm.value;
 
     console.log(this.issue);
-    this._httpService.post('http://172.104.91.187/issues', this.issue, this._authService.user.api_token ).subscribe(
+    this._httpService.post(`${Config.API_SERVER_URL}/issues`, this.issue, this._authService.user.api_token ).subscribe(
       data => {
         // something to do...
       },
